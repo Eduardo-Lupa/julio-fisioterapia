@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model mao_esquerda {
+  id       Int      @id @default(autoincrement())
+  time     DateTime @default(now()) @db.Timestamp(6)
+  eixo_x   Float
+  eixo_y   Float
+  eixo_z   Float
+}
+
+model mao_direita {
+  id       Int      @id @default(autoincrement())
+  time     DateTime @default(now()) @db.Timestamp(6)
+  eixo_x   Float
+  eixo_y   Float
+  eixo_z   Float
+}
+
+model pe_esquerdo {
+  id       Int      @id @default(autoincrement())
+  time     DateTime @default(now()) @db.Timestamp(6)
+  eixo_x   Float
+  eixo_y   Float
+  eixo_z   Float
+}
+
+model pe_direito {
+  id       Int      @id @default(autoincrement())
+  time     DateTime @default(now()) @db.Timestamp(6)
+  eixo_x   Float
+  eixo_y   Float
+  eixo_z   Float
+}
+
+model peito {
+  id       Int      @id @default(autoincrement())
+  time     DateTime @default(now()) @db.Timestamp(6)
+  eixo_x   Float
+  eixo_y   Float
+  eixo_z   Float
+}
