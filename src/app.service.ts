@@ -15,46 +15,51 @@ export class AppService {
     eixo_y: number,
     eixo_z: number,
   ) {
-    if (type == 'pe_direito') {
-      const novoRegistro: Awaited<
-        ReturnType<typeof this.prisma.pe_direito.create>
-      > = await this.prisma.pe_direito.create({
-        data: {
-          eixo_x,
-          eixo_y,
-          eixo_z,
-        },
-      });
-      return { success: true, data: novoRegistro };
-    } else if (type == 'pe_esquerdo') {
-      const novoRegistro = await this.prisma.pe_esquerdo.create({
-        data: {
-          eixo_x,
-          eixo_y,
-          eixo_z,
-        },
-      });
-      return { success: true, data: novoRegistro };
-    } else if (type == 'mao_direita') {
-      const novoRegistro = await this.prisma.mao_direita.create({
-        data: {
-          eixo_x,
-          eixo_y,
-          eixo_z,
-        },
-      });
-      return { success: true, data: novoRegistro };
-    } else if (type == 'mao_esquerda') {
-      const novoRegistro = await this.prisma.mao_esquerda.create({
-        data: {
-          eixo_x,
-          eixo_y,
-          eixo_z,
-        },
-      });
-      return { success: true, data: novoRegistro };
-    } else {
-      return { error: `Tipo '${type}' inválido` };
+    try {
+      if (type == 'pe_direito') {
+        const novoRegistro: Awaited<
+          ReturnType<typeof this.prisma.pe_direito.create>
+        > = await this.prisma.pe_direito.create({
+          data: {
+            eixo_x,
+            eixo_y,
+            eixo_z,
+          },
+        });
+        return { success: true, data: novoRegistro };
+      } else if (type == 'pe_esquerdo') {
+        const novoRegistro = await this.prisma.pe_esquerdo.create({
+          data: {
+            eixo_x,
+            eixo_y,
+            eixo_z,
+          },
+        });
+        return { success: true, data: novoRegistro };
+      } else if (type == 'mao_direita') {
+        const novoRegistro = await this.prisma.mao_direita.create({
+          data: {
+            eixo_x,
+            eixo_y,
+            eixo_z,
+          },
+        });
+        return { success: true, data: novoRegistro };
+      } else if (type == 'mao_esquerda') {
+        const novoRegistro = await this.prisma.mao_esquerda.create({
+          data: {
+            eixo_x,
+            eixo_y,
+            eixo_z,
+          },
+        });
+        return { success: true, data: novoRegistro };
+      } else {
+        return { error: `Tipo '${type}' inválido` };
+      }
+    } catch (error) {
+      console.error('Erro ao salvar dados:', error);
+      return { error: 'Erro ao salvar dados no banco de dados' };
     }
   }
 }

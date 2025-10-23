@@ -10,22 +10,27 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Post('inserir_dados')
+  @Post('/inserir_dados')
   inserirDados(
     @Body() body: { ax: string; ay: string; az: string; type: string },
   ) {
-    const { ax, ay, az, type } = body;
-    console.log(body);
+    try {
+      const { ax, ay, az, type } = body;
+      console.log(body);
 
-    if (!ax || !ay || !az || !type) {
-      return { error: 'Parâmetros incompletos' };
+      if (!ax || !ay || !az || !type) {
+        return { error: 'Parâmetros incompletos' };
+      }
+
+      return this.appService.salvarDados(
+        type,
+        parseFloat(ax),
+        parseFloat(ay),
+        parseFloat(az),
+      );
+    } catch (error) {
+      console.error('Erro ao inserir dados:', error);
+      return { error: 'Erro ao processar a solicitação' };
     }
-
-    return this.appService.salvarDados(
-      type,
-      parseFloat(ax),
-      parseFloat(ay),
-      parseFloat(az),
-    );
   }
 }
