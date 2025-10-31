@@ -51,4 +51,5 @@ model peito {
   eixo_x   Float
   eixo_y   Float
   eixo_z   Float
+  ecg      Float
 }

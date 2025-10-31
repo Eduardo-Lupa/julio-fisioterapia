@@ -14,6 +14,7 @@ export class AppService {
     eixo_x: number,
     eixo_y: number,
     eixo_z: number,
+    ecg: number,
   ) {
     try {
       if (type == 'pe_direito') {
@@ -51,6 +52,16 @@ export class AppService {
             eixo_x,
             eixo_y,
             eixo_z,
+          },
+        });
+        return { success: true, data: novoRegistro };
+      } else if (type == 'peito') {
+        const novoRegistro = await this.prisma.peito.create({
+          data: {
+            eixo_x,
+            eixo_y,
+            eixo_z,
+            ecg,
           },
         });
         return { success: true, data: novoRegistro };

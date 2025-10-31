@@ -12,10 +12,17 @@ export class AppController {
 
   @Post('/inserir_dados')
   inserirDados(
-    @Body() body: { ax: string; ay: string; az: string; type: string },
+    @Body()
+    body: {
+      ax: string;
+      ay: string;
+      az: string;
+      type: string;
+      ecg?: string;
+    },
   ) {
     try {
-      const { ax, ay, az, type } = body;
+      const { ax, ay, az, type, ecg } = body;
       console.log(body);
 
       if (!ax || !ay || !az || !type) {
@@ -27,6 +34,7 @@ export class AppController {
         parseFloat(ax),
         parseFloat(ay),
         parseFloat(az),
+        parseFloat(ecg ? ecg : '0'),
       );
     } catch (error) {
       console.error('Erro ao inserir dados:', error);
